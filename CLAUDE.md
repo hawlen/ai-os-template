@@ -17,13 +17,17 @@ rule below applies.
   direct attempt.
 
 ## Model routing (dispatch economy)
-The orchestrating session stays on the big model; dispatched work runs on the
-cheapest model that does it well. When dispatching subagents, set the model:
-- Well-specified implementation from a plan / mechanical work → `executor`
-  agent (pinned Sonnet)
-- Code review, failure analysis → `code-reviewer` agent if present, else any
-  subagent with model: opus
-- Architecture decisions → `architect` agent (Fable) — rare
+Superpowers' subagent-driven-development has its own Model Selection rules —
+during plan execution those govern. This is the tier map, and the default
+everywhere else. Always set the model explicitly when dispatching — an omitted
+model silently inherits the expensive session model.
+- Pure transcription / mechanical edits (complete code already in the task
+  text, single-file fixes) → cheapest tier (model: haiku)
+- Well-specified implementation from prose → `executor` agent (Sonnet)
+- Reviews → scale to the diff: mechanical diff → Sonnet; subtle or risky →
+  Opus (`code-reviewer` agent if present)
+- Architecture decisions → `architect` agent (Fable); final whole-branch
+  review → most capable model
 - Trivial-triage tasks: no dispatch — in-session is cheaper than the handoff.
 
 ## Project facts
@@ -46,8 +50,9 @@ but Superpowers decides delegation — this file does NOT orchestrate agents.
 - AFTER non-trivial work or any bug fix: append a dated entry to the matching log
   (`decision_log` / `bug_log` / `architecture_log`). Trivial-triage tasks don't
   need entries.
-- Retry circuit breaker: the same failure surviving 3 fix attempts means stop
-  patching — root-cause it (systematic debugging), and consider the architect.
+- For any real bug, systematic debugging applies from the FIRST failure — never
+  patch blind. Circuit breaker: if the same failure survives 3 attempts, stop
+  entirely — question the design, consider the architect.
 
 ## Context
 Work from the system map and recent changes. No full re-reads unless needed.

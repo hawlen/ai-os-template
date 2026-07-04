@@ -1,0 +1,19 @@
+{
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/hooks/session-start.ps1",
+            "timeout": 15,
+            "statusMessage": "Injecting AI OS memory layer"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -41,9 +41,13 @@ but Superpowers decides delegation — this file does NOT orchestrate agents.
 
 ## Memory & docs
 - `memory/system_map.md` — keep current when modules or dependencies change; keep it small.
-- `memory/decision_log.md`, `memory/bug_log.md`, `memory/architecture_log.md` —
-  optional running notes. Read if relevant; update only if you find them useful.
-  (Superpowers has its own conversation memory, so logging here is not required.)
+- BEFORE non-trivial work: skim the injected memory tails; if the task resembles
+  a past failure or decision, check `memory/bug_log.md` / `memory/decision_log.md`.
+- AFTER non-trivial work or any bug fix: append a dated entry to the matching log
+  (`decision_log` / `bug_log` / `architecture_log`). Trivial-triage tasks don't
+  need entries.
+- Retry circuit breaker: the same failure surviving 3 fix attempts means stop
+  patching — root-cause it (systematic debugging), and consider the architect.
 
 ## Context
 Work from the system map and recent changes. No full re-reads unless needed.

@@ -81,6 +81,22 @@ with a fresh history.) Review the diff before committing: your CLAUDE.md project
 facts and memory logs are yours — take the template's changes to hooks, agents,
 settings, and the CLAUDE.md workflow sections.
 
+## Create your own fleet (multiple PCs, shared memory)
+
+The same pattern the maintainers use. If you run AI OS on several of your own
+computers and want them to share one living memory:
+
+1. Create a **private** repo from this template ("Use this template" → private).
+   That repo becomes your fleet workspace.
+2. Clone it on each of your machines and run the setup prompt there. If your
+   machines use different GitHub accounts, invite them as collaborators
+   (Settings → Collaborators).
+3. Discipline: `git pull --rebase` before work, commit + `git push` after —
+   every machine's decisions, bugs, and fixes become shared memory for all.
+4. Keep pulling base improvements via "Updating your workspace" above.
+5. Keep sensitive project details out of a fleet you might ever share; separate
+   sensitive work into its own template-created repo.
+
 ## Related
 
 - **Machine layer:** [hawlen/ai-os](https://github.com/hawlen/ai-os) — global

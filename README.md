@@ -64,6 +64,11 @@ Superpowers plugin — accept both. Then paste this prompt:
 - **Memory archival:** when a memory log grows past ~500 lines, move its oldest
   entries to `memory/archive/<year>-<logname>.md`. The hook only injects tails,
   so sessions stay cheap either way — archiving keeps the working files scannable.
+  The `consolidate-memory` skill does this as a guided ritual: merge duplicates,
+  distill lessons into the system map, archive the rest.
+- **Health check:** `powershell -NoProfile -ExecutionPolicy Bypass -File
+  scripts/verify.ps1` verifies an install anytime — structure, settings, hook
+  execution, git wiring, and single-plugin state.
 
 ## Updating your workspace
 
@@ -72,9 +77,12 @@ later:
 
 ```
 git remote add template https://github.com/hawlen/ai-os-template.git   # once
-git fetch template
-git merge template/main --allow-unrelated-histories
+git fetch template --tags
+git merge v1.0.0 --allow-unrelated-histories    # merge a tagged release
 ```
+
+Merge a **tagged release** (see [CHANGELOG.md](CHANGELOG.md)) rather than
+`template/main` — tags are known-good states validated by CI.
 
 (`--allow-unrelated-histories` is needed because template-created repos start
 with a fresh history.) Review the diff before committing: your CLAUDE.md project

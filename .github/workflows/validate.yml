@@ -27,3 +27,9 @@ jobs:
         run: |
           if (-not (Test-Path memory/system_map.md)) { throw 'memory/system_map.md missing - CLAUDE.md @import would break' }
           Write-Output 'import target OK'
+
+      - name: full health check (scripts/verify.ps1)
+        shell: powershell
+        run: |
+          & .\scripts\verify.ps1
+          if ($LASTEXITCODE -ne 0) { throw "verify.ps1 reported $LASTEXITCODE failure(s)" }

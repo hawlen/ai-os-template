@@ -8,7 +8,7 @@ Auto-imported into every session via CLAUDE.md — keep this file small.
 - `CLAUDE.md` — project memory: Superpowers-driven workflow, project facts, landmines
 - Superpowers plugin (`superpowers@claude-plugins-official`) — owns orchestration: brainstorm → plan → TDD → review
 - `memory/` — persistent memory layer (this folder)
-- `.claude/agents/architect.md` — specialist for deep/one-off design questions (read-only)
+- `.claude/agents/` — architect (Fable, read-only, rare) + executor (Sonnet, dispatch target for implementation)
 - `.claude/settings.json` — auto-enables Superpowers + SessionStart memory-injection hook
 - `scripts/hooks/session-start.ps1` — injects recent memory-log tails into every session
 

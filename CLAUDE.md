@@ -16,6 +16,16 @@ rule below applies.
   beyond one file — stop and restart it through the full workflow. No second
   direct attempt.
 
+## Model routing (dispatch economy)
+The orchestrating session stays on the big model; dispatched work runs on the
+cheapest model that does it well. When dispatching subagents, set the model:
+- Well-specified implementation from a plan / mechanical work → `executor`
+  agent (pinned Sonnet)
+- Code review, failure analysis → `code-reviewer` agent if present, else any
+  subagent with model: opus
+- Architecture decisions → `architect` agent (Fable) — rare
+- Trivial-triage tasks: no dispatch — in-session is cheaper than the handoff.
+
 ## Project facts
 <!-- Fill this in as the project takes shape. Keep it short — it loads every session. -->
 - What this system is:

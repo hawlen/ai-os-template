@@ -61,6 +61,25 @@ Superpowers plugin — accept both. Then paste this prompt:
   logs, so past context survives across sessions and machines.
 - **Superpowers** drives the engineering workflow; the **architect** subagent is
   reserved for rare, genuinely architectural questions.
+- **Memory archival:** when a memory log grows past ~500 lines, move its oldest
+  entries to `memory/archive/<year>-<logname>.md`. The hook only injects tails,
+  so sessions stay cheap either way — archiving keeps the working files scannable.
+
+## Updating your workspace
+
+Your project took a snapshot of this template. To pull in template improvements
+later:
+
+```
+git remote add template https://github.com/hawlen/ai-os-template.git   # once
+git fetch template
+git merge template/main --allow-unrelated-histories
+```
+
+(`--allow-unrelated-histories` is needed because template-created repos start
+with a fresh history.) Review the diff before committing: your CLAUDE.md project
+facts and memory logs are yours — take the template's changes to hooks, agents,
+settings, and the CLAUDE.md workflow sections.
 
 ## Related
 

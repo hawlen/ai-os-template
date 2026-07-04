@@ -1,0 +1,29 @@
+name: validate
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: settings.json parses and wires the essentials
+        shell: pwsh
+        run: |
+          $s = Get-Content .claude/settings.json -Raw | ConvertFrom-Json
+          if (-not $s.enabledPlugins.'superpowers@claude-plugins-official') { throw 'superpowers plugin not enabled' }
+          if (-not $s.hooks.SessionStart) { throw 'SessionStart hook missing' }
+          Write-Output 'settings.json OK'
+
+      - name: SessionStart hook pipe-test
+        shell: pwsh
+        run: |
+          '{}' | powershell -NoProfile -ExecutionPolicy Bypass -File scripts/hooks/session-start.ps1
+          if ($LASTEXITCODE -ne 0) { throw "hook exited $LASTEXITCODE" }
+          Write-Output 'hook OK'
+
+      - name: CLAUDE.md import target exists
+        shell: pwsh
+        run: |
+          if (-not (Test-Path memory/system_map.md)) { throw 'memory/system_map.md missing - CLAUDE.md @import would break' }
+          Write-Output 'import target OK'

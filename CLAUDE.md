@@ -4,7 +4,17 @@
 ## How work runs here
 Superpowers owns the workflow: brainstorm the spec with me, plan, red/green TDD,
 implement in small steps, then review. Don't bypass it — no "just skip planning"
-or "skip tests" unless I explicitly say so for a throwaway.
+or "skip tests" unless I explicitly say so for a throwaway, or the effort-triage
+rule below applies.
+
+## Effort triage (overrides default skill triggering)
+- TRIVIAL (single file, reversible, known pattern, no design decision, no new
+  dependency): skip brainstorming and planning — implement directly.
+  Verification before completion still applies, always.
+- Everything else: full Superpowers workflow.
+- Escalation: the moment a "trivial" task fails once, surprises you, or grows
+  beyond one file — stop and restart it through the full workflow. No second
+  direct attempt.
 
 ## Project facts
 <!-- Fill this in as the project takes shape. Keep it short — it loads every session. -->
